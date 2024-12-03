@@ -35,13 +35,11 @@ mkdir -p "eazybank-system/services"
 # 2. Clone repositories
 print_message "Cloning eazybank-service repository."
 cd eazybank-system
-SERVICE_BRANCH="release-11-udiscontinue"
-git clone -b "$SERVICE_BRANCH" https://github.com/sdeshmukh20/eazybank-service.git $ROOT_DIRECTORY/eazybank-system/services/eazybank-service
+cp -r /Users/sdeshmukh/DEV/visionmax/syestem24/services/eazybank-service services
 
 print_message "Cloning eazybank-deployment repository..."
-DEPLOYMENT_BRANCH="release-11-udiscontinue"
 #read -p "Enter the branch name for eazybank-deployment: " DEPLOYMENT_BRANCH
-git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazybank-deployment.git $ROOT_DIRECTORY/eazybank-system/infra/eazybank-deployment
+cp -r /Users/sdeshmukh/DEV/visionmax/syestem24/infra/test-repo/eazybank-deployment infra
 
 # 3. Build eazybank-service
 print_message "Building eazybank-service with Maven..."
