@@ -31,6 +31,7 @@ cd "${ROOT_DIRECTORY}"
 print_message "Creating directories..."
 mkdir -p "eazybank-system/infra/eazybank-deployment"
 mkdir -p "eazybank-system/services/eazybank-service"
+mkdir -p "eazybank-system/client-ui/eazy-bank-ui"
 
 # 2. Clone repositories
 print_message "Cloning eazybank-service repository."
@@ -42,6 +43,11 @@ print_message "Cloning eazybank-deployment repository..."
 DEPLOYMENT_BRANCH="release-11-udiscontinue"
 #read -p "Enter the branch name for eazybank-deployment: " DEPLOYMENT_BRANCH
 git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazybank-deployment.git infra/eazybank-deployment
+
+print_message "Cloning eazybank-ui repository..."
+DEPLOYMENT_BRANCH="release-11-udiscontinue"
+#read -p "Enter the branch name for eazybank-client-ui: " DEPLOYMENT_BRANCH
+git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazy-bank-ui client-ui/eazy-bank-ui
 
 # 3. Build eazybank-service
 print_message "Building eazybank-service with Maven..."
@@ -57,7 +63,7 @@ mkdir -p "$DEPLOYMENT_BUILD_DIR"
 cp "$TARGET_JAR" "$DEPLOYMENT_BUILD_DIR"
 
 # 5. Print success message
-print_message "Setup completed successfully!"
+print_message "Backend Setup completed successfully!"
 
 cd ../../infra/eazybank-deployment/bootstrap
 print_message "Executing bootstrap from launcher"
