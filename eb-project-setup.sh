@@ -16,7 +16,7 @@ fi
 
 # Check if the environment name is provided
 if [ -z "$2" ]; then
-  print_message "Environment name is required (e.g.dev,uat). Exiting."
+  print_message "Deployment branch-name is required (e.g.release1.0). Exiting."
   exit 1
 fi
 
@@ -36,16 +36,16 @@ mkdir -p "eazybank-system/client-ui/eazy-bank-ui"
 # 2. Clone repositories
 print_message "Cloning eazybank-service repository."
 cd eazybank-system
-SERVICE_BRANCH="release-11-udiscontinue"
+SERVICE_BRANCH="$2"
 git clone -b "$SERVICE_BRANCH" https://github.com/sdeshmukh20/eazybank-service.git services/eazybank-service
 
 print_message "Cloning eazybank-deployment repository..."
-DEPLOYMENT_BRANCH="release-11-udiscontinue"
+DEPLOYMENT_BRANCH="$2"
 #read -p "Enter the branch name for eazybank-deployment: " DEPLOYMENT_BRANCH
 git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazybank-deployment.git infra/eazybank-deployment
 
 print_message "Cloning eazybank-ui repository..."
-DEPLOYMENT_BRANCH="release-11-udiscontinue"
+
 #read -p "Enter the branch name for eazybank-client-ui: " DEPLOYMENT_BRANCH
 git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazy-bank-ui client-ui/eazy-bank-ui
 
@@ -63,10 +63,10 @@ mkdir -p "$DEPLOYMENT_BUILD_DIR"
 cp "$TARGET_JAR" "$DEPLOYMENT_BUILD_DIR"
 
 # 5. Print success message
-print_message "Backend Setup completed successfully!"
+print_message "Backend code downloaded successfully!"
 
 cd ../../infra/eazybank-deployment/bootstrap
 print_message "Executing bootstrap from launcher"
 chmod +x ./main.sh
-./main.sh $2
+#./main.sh $2
 
