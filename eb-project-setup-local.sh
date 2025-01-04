@@ -29,25 +29,17 @@ print_message "Setting up EB-System in directory: ${ROOT_DIRECTORY}"
 #SERVICE_DIR="${ROOT_DIRECTORY}/eazybank-system/services"
 cd "${ROOT_DIRECTORY}"
 print_message "Creating directories..."
-mkdir -p "eazybank-system/infra/eazybank-deployment"
-mkdir -p "eazybank-system/services/eazybank-service"
-mkdir -p "eazybank-system/client-ui/eazy-bank-ui"
+mkdir -p "eazybank-system/infra"
+mkdir -p "eazybank-system/services"
 
 # 2. Clone repositories
 print_message "Cloning eazybank-service repository."
 cd eazybank-system
-SERVICE_BRANCH="release-11-udiscontinue"
-git clone -b "$SERVICE_BRANCH" https://github.com/sdeshmukh20/eazybank-service.git services/eazybank-service
+cp -r /Users/sdeshmukh/DEV/visionmax/syestem24/services/eazybank-service services
 
 print_message "Cloning eazybank-deployment repository..."
-DEPLOYMENT_BRANCH="release-11-udiscontinue"
 #read -p "Enter the branch name for eazybank-deployment: " DEPLOYMENT_BRANCH
-git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazybank-deployment.git infra/eazybank-deployment
-
-print_message "Cloning eazybank-ui repository..."
-DEPLOYMENT_BRANCH="release-11-udiscontinue"
-#read -p "Enter the branch name for eazybank-client-ui: " DEPLOYMENT_BRANCH
-git clone -b "$DEPLOYMENT_BRANCH" https://github.com/sdeshmukh20/eazy-bank-ui client-ui/eazy-bank-ui
+cp -r /Users/sdeshmukh/DEV/visionmax/syestem24/infra/test-repo/eazybank-deployment infra
 
 # 3. Build eazybank-service
 print_message "Building eazybank-service with Maven..."
@@ -63,7 +55,7 @@ mkdir -p "$DEPLOYMENT_BUILD_DIR"
 cp "$TARGET_JAR" "$DEPLOYMENT_BUILD_DIR"
 
 # 5. Print success message
-print_message "Backend Setup completed successfully!"
+print_message "Setup completed successfully!"
 
 cd ../../infra/eazybank-deployment/bootstrap
 print_message "Executing bootstrap from launcher"
